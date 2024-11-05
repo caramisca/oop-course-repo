@@ -1,24 +1,25 @@
 package task1;
 
-public class SyrupCappuccino extends Cappuccino {
+public class SyrupCappuccino extends Cappuccino{
+    private static final String name = "SyrupCappuccino";
     private SyrupType syrup;
-    private final String coffee = "SyrupCappuccino";
 
-    public SyrupCappuccino(Intensity coffeeIntensity, int mlOfMilk, SyrupType syrup) {
-        super(coffeeIntensity, mlOfMilk);
+    public SyrupCappuccino(Intensity intensity, int mlOfMilk, SyrupType syrup){
+        super(intensity, mlOfMilk);
         this.syrup = syrup;
     }
 
-    public SyrupType getSyrup() {
+    public String getName(){
+        return name;
+    }
+
+    public SyrupType getSyrup(){
         return syrup;
     }
 
-    public void setSyrup(SyrupType syrup) {
-        this.syrup = syrup;
-    }
-
     @Override
-    public String getCoffee() {
-        return coffee;
+    public void printCoffeeDetails(String name) {
+        super.printCoffeeDetails(this.name);
+        System.out.println("Type of syrup: " + syrup);
     }
 }
