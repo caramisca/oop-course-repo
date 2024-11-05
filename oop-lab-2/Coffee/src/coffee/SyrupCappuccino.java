@@ -1,4 +1,4 @@
-package task1;
+package coffee;
 
 public class SyrupCappuccino extends Cappuccino{
     private static final String name = "SyrupCappuccino";
@@ -22,7 +22,7 @@ public class SyrupCappuccino extends Cappuccino{
     }
 
 
-    public String getName(){
+    public static String getName(){
         return name;
     }
 

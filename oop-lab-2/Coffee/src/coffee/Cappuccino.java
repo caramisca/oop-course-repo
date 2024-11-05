@@ -1,4 +1,4 @@
-package task1;
+package coffee;
 
 public class Cappuccino extends Coffee{
     private static final String name = "Cappuccino";
@@ -19,7 +19,7 @@ public class Cappuccino extends Coffee{
         this.mlOfMilk = mlOfMilk;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 

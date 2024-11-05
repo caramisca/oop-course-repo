@@ -1,4 +1,4 @@
-package task1;
+package coffee;
 
 public enum Intensity {
     LIGHT, NORMAL, STRONG

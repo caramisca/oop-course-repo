@@ -1,10 +1,13 @@
-package task1;
+package coffee;
 
-public class Coffee {
+public class Coffee{
     private Intensity intensity;
-    private String name ;
+    private static final String name = "Coffee";
 
-    public Coffee makeCoffee(String name) {
+    public Coffee(Intensity intensity) {
+        this.intensity = intensity;
+    }
+    public Coffee makeCoffee() {
         System.out.println("~ Coffee Preparation: " + name + " ~");
         System.out.printf(" - Bean Intensity: %s%n", intensity);
         System.out.println(" - Grinding beans and brewing coffee");
@@ -13,11 +16,7 @@ public class Coffee {
         return this;
     }
 
-    public Coffee(Intensity intensity) {
-        this.intensity = intensity;
-    }
-
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -26,7 +25,8 @@ public class Coffee {
     }
 
     public void printCoffeeDetails(String name) {
-        System.out.println("\nDetails for preparing a " + name + ":");
-        System.out.println("The intensity is set to " + intensity);
+        System.out.println("Coffee type:  " + name);
+        System.out.println("Intensity: " + intensity);
     }
+
 }

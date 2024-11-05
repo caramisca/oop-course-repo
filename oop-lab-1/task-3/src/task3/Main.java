@@ -1,6 +1,6 @@
 package task3;
 
-import task1.Display;
+//import coffee.Display;
 import java.util.Scanner;
 
 public class Main {
