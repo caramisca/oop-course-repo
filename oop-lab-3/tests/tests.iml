@@ -12,5 +12,6 @@
     <orderEntry type="module" module-name="dining" />
     <orderEntry type="module" module-name="refueling" />
     <orderEntry type="module" module-name="model" />
+    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.10.1" level="project" />
   </component>
 </module>
