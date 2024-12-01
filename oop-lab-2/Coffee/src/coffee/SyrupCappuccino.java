@@ -1,38 +1,42 @@
 package coffee;
 
 public class SyrupCappuccino extends Cappuccino{
-    private static final String name = "SyrupCappuccino";
     private SyrupType syrup;
 
     public SyrupCappuccino(Intensity intensity, int mlOfMilk, SyrupType syrup){
-        super(intensity, mlOfMilk);
+        super("Syrup Cappuccino",intensity, mlOfMilk);
         this.syrup = syrup;
     }
 
 
-    public SyrupCappuccino makeCoffee() {
-        System.out.println(":: Crafting a Delicious Syrup Cappuccino ::");
-        System.out.printf(" - Bean Intensity: %s%n", getIntensity());
-        System.out.println(" - Espresso Shot: Brewed rich and bold");
-        System.out.printf(" - Adding Syrup: %s flavor%n", syrup);
-        System.out.printf(" - Milk Steamed: %d ml, creating a creamy texture%n", getMlOfMilk());
-        System.out.printf(" - Finishing Touch: Topped with foam and a hint of %s syrup%n", syrup);
-        System.out.println(">>> Your Syrup Cappuccino is ready to enjoy! <<<");
+    public SyrupCappuccino makeSyrupCappuccino() {
+        super.makeRecipe();
+        System.out.printf(" - Adding Syrup: %s flavor\n", syrup);
         return this;
     }
 
+    @Override
+    public void makeRecipe(){
+        super.makeRecipe();
 
-    public static String getName(){
-        return name;
     }
 
     public SyrupType getSyrup(){
         return syrup;
     }
+    public void setSyrup(SyrupType syrup) {
+        this.syrup = syrup;
+    }
 
     @Override
-    public void printCoffeeDetails(String name) {
-        super.printCoffeeDetails(this.name);
-        System.out.println("Type of syrup: " + syrup);
+    public void printCoffeeDetails() {
+        super.printCoffeeDetails();
+        System.out.println(" - Type of syrup: " + syrup);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "syrup = " + syrup;
     }
 }

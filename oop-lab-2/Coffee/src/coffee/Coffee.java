@@ -2,21 +2,24 @@ package coffee;
 
 public class Coffee{
     private Intensity intensity;
-    private static final String name = "Coffee";
+    private String name;
 
-    public Coffee(Intensity intensity) {
+    public Coffee(String name, Intensity intensity) {
+        this.name = name;
         this.intensity = intensity;
     }
-    public Coffee makeCoffee() {
-        System.out.println("~ Coffee Preparation: " + name + " ~");
-        System.out.printf(" - Bean Intensity: %s%n", intensity);
-        System.out.println(" - Grinding beans and brewing coffee");
-        System.out.println(" - Pouring freshly brewed coffee into your cup");
-        System.out.println("=> Your " + name + " is ready to enjoy!");
+    public void makeRecipe() {
+        System.out.println("--- Preparing " + name + " ---");
+        System.out.println(" - Grinding beans to " + intensity + " intensity" );
+        System.out.println(" - Brewing an espresso shot and poring it into the cup ");
+    }
+
+    public Coffee makeCoffee(){
+        this.makeRecipe();
         return this;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
@@ -24,9 +27,17 @@ public class Coffee{
         return intensity;
     }
 
-    public void printCoffeeDetails(String name) {
-        System.out.println("Coffee type:  " + name);
-        System.out.println("Intensity: " + intensity);
+    public void printCoffeeDetails() {
+        System.out.println("\n");
+        System.out.println("Coffee type:  " + getName());
+        System.out.println("--- Ingredients needed ---");
+        System.out.println(" - Bean Intensity: " + intensity);
+    }
+
+    @Override
+    public String toString() {
+        return  "Name = '" + name + '\'' +
+                "coffeeIntensity = " + intensity;
     }
 
 }

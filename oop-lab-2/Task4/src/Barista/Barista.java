@@ -2,6 +2,7 @@ package Barista;
 
 import coffee.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,11 +15,11 @@ public class Barista {
         }
 
         for (String coffeeType : coffeeOrders) {
-            System.out.println("Processing order for: " + coffeeType);
+            System.out.println("\nProcessing order for: " + coffeeType);
             handleCoffeeOrder(coffeeType);
         }
 
-        System.out.println("All orders are complete. Thank you for visiting the Coffee Shop!");
+        System.out.println("\nAll orders are complete. Thank you for visiting the Coffee Shop!");
     }
 
     private List<String> getUserCoffeeOrders() {
@@ -27,6 +28,7 @@ public class Barista {
 
         while (ordering) {
             printMenu();
+
             int choice = getValidatedIntegerInput("Enter your choice (1-6):", 1, 6);
 
             switch (choice) {
@@ -49,8 +51,9 @@ public class Barista {
     }
 
     private void handleCoffeeOrder(String coffeeType) {
-        System.out.println("Would you like the Barista recommendation or customize it yourself?");
-        System.out.println("1. Barista Recommendation");
+        clearScreen();
+        System.out.println("\n Do you want to customize your order?");
+        System.out.println("1. Use Preset");
         System.out.println("2. Customize");
         printSeparator();
 
@@ -65,22 +68,61 @@ public class Barista {
             System.out.println("Your custom " + coffeeType + " is ready!");
         }
 
-        coffee.printCoffeeDetails("");
-
-
-        coffee.makeCoffee();
+        coffee.printCoffeeDetails();
         printSeparator();
+        try {
+            switch (coffee.getClass().getSimpleName()) {
+                case "Coffee" -> {
+                    Method method = coffee.getClass().getMethod("makeRecipe");
+                    method.invoke(coffee);
+                }
+                case "Americano" -> {
+                    Method method = coffee.getClass().getMethod("makeAmericano");
+                    method.invoke(coffee);
+                }
+                case "Cappuccino" -> {
+                    Method method = coffee.getClass().getMethod("makeCappuccino");
+                    method.invoke(coffee);
+                }
+                case "SyrupCappuccino" -> {
+                    Method method = coffee.getClass().getMethod("makeSyrupCappuccino");
+                    method.invoke(coffee);
+                }
+                case "PumpkinSpiceLatte" -> {
+                    Method method = coffee.getClass().getMethod("makePumpkinSpice");
+                    method.invoke(coffee);
+                }
+                default -> throw new IllegalArgumentException("Unknown coffee type");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Your " + coffee.getName() + " is ready! Enjoy the coffee.");
+
     }
 
     private Coffee getBaristaRecommendation(String coffeeType) {
-        return switch (coffeeType) {
-            case "Coffee" -> new Coffee(Intensity.NORMAL);
-            case "Americano" -> new Americano(Intensity.NORMAL, 150);
-            case "Cappuccino" -> new Cappuccino(Intensity.NORMAL, 150);
-            case "Syrup Cappuccino" -> new SyrupCappuccino(Intensity.NORMAL, 150, SyrupType.VANILLA);
-            case "Pumpkin Spice Latte" -> new PumpkinSpiceLatte(Intensity.NORMAL, 150, 10);
+        printSeparator();
+        switch (coffeeType) {
+            case "Coffee" -> {
+                return new Coffee("Coffee",Intensity.NORMAL);
+            }
+            case "Americano" -> {
+                return new Americano( Intensity.NORMAL, 150);
+            }
+            case "Cappuccino" -> {
+                return new Cappuccino( Intensity.NORMAL, 150);
+            }
+            case "Syrup Cappuccino" -> {
+                return new SyrupCappuccino( Intensity.NORMAL, 150, SyrupType.POPCORN);
+            }
+            case "Pumpkin Spice Latte" ->{
+                return new PumpkinSpiceLatte(Intensity.NORMAL, 150, 10);
+
+            }
             default -> throw new IllegalArgumentException("Unknown coffee type: " + coffeeType);
-        };
+        }
+
     }
 
     private Coffee getCustomCoffee(String coffeeType) {
@@ -89,6 +131,9 @@ public class Barista {
         SyrupType syrup = null;
 
         switch (coffeeType) {
+            case "Coffee" -> {
+                return new Coffee("Coffee",intensity);
+            }
             case "Americano" -> {
                 mlOfWater = getValidatedIntegerInput("Enter ml of water: ", 50, 300);
                 return new Americano(intensity, mlOfWater);
@@ -167,7 +212,7 @@ public class Barista {
     }
 
     private void printMenu() {
-        System.out.println("Welcome to the Coffee Shop!");
+        System.out.println("\nWelcome to the Coffee Shop!");
         System.out.println("Choose your coffee type:");
         System.out.println("1. Coffee");
         System.out.println("2. Americano");
@@ -180,5 +225,10 @@ public class Barista {
 
     private void printSeparator() {
         System.out.println("----------------------------------------------------------------");
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
