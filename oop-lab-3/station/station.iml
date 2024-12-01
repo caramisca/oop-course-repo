@@ -7,9 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="queue" />
-    <orderEntry type="module" module-name="station" />
-    <orderEntry type="module" module-name="dining" />
     <orderEntry type="module" module-name="refueling" />
+    <orderEntry type="module" module-name="dining" />
   </component>
 </module>
