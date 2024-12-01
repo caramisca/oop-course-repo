@@ -1,25 +1,30 @@
 package test;
 
-import dining.PeopleDinner;
-import dining.RobotDinner;
-import refueling.ElectricStation;
-import refueling.GasStation;
-import station.CarServiceStation;
+import dining.*;
+import refueling.*;
+import station.*;
+import model.Car;
+import queue.*;
 
 public class CarServiceTest {
     public static void main(String[] args) {
-        // Create service stations
-        CarServiceStation electricService = new CarServiceStation(new PeopleDinner(), new ElectricStation());
-        CarServiceStation gasService = new CarServiceStation(new RobotDinner(), new GasStation());
+        // Create a queue for storing cars
+        Queue<Car> carQueue = new ArrayQueue<>();  // Explicitly specify that it's a Queue of Cars
 
-        // Serve some cars
-        electricService.serveCar("1", "ELECTRIC", "PEOPLE");
-        electricService.serveCar("2", "ELECTRIC", "PEOPLE");
-        gasService.serveCar("3", "GAS", "ROBOTS");
-        gasService.serveCar("4", "GAS", "ROBOTS");
+        // Create service instances
+        Dineable peopleDinner = new PeopleDinner();
+        Dineable robotDinner = new RobotDinner();
+        Refuelable electricStation = new ElectricStation();
+        Refuelable gasStation = new GasStation();
 
-        // Print statistics
-        electricService.printStats();
-        gasService.printStats();
+        // Create a CarStation instance
+        CarStation carStation = new CarStation(peopleDinner, electricStation, carQueue);
+
+        // Add some cars to the queue (for testing purposes)
+        carStation.addCar(new Car("1", "ELECTRIC", "PEOPLE", false, 30));  // Example Car 1
+        carStation.addCar(new Car("2", "GAS", "ROBOTS", true, 40));  // Example Car 2
+
+        // Serve the cars
+        carStation.serveCars();
     }
 }

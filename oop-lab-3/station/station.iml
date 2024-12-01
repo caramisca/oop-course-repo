@@ -9,5 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="refueling" />
     <orderEntry type="module" module-name="dining" />
+    <orderEntry type="module" module-name="queue" />
+    <orderEntry type="module" module-name="model" />
   </component>
 </module>
