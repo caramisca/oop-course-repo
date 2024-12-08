@@ -1,0 +1,31 @@
+package coffee;
+
+public class Americano extends Coffee {
+    private int mlOfWater;
+
+    public Americano(Intensity intensity, int mlOfWater){
+        super("Americano",intensity);
+        this.mlOfWater = mlOfWater;
+    }
+
+    public Americano makeAmericano() {
+        super.makeRecipe();
+        System.out.println(" - Adding " + mlOfWater + "ml of hot water ");
+        return this;
+    }
+
+    public int getMlOfWater(){
+        return mlOfWater;
+    }
+
+    public void setMlOfWater(int mlOfWater) {
+        this.mlOfWater = mlOfWater;
+    }
+
+
+    @Override
+    public void printCoffeeDetails() {
+        super.printCoffeeDetails();
+        System.out.println(" - Quantity of water: " + mlOfWater + " ml");
+    }
+}
