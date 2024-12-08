@@ -1,30 +1,26 @@
 package test;
 
 import queue.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class QueueTest {
-    public static void main(String[] args) {
-        testQueue(new ArrayQueue<>());
-        testQueue(new LinkedListQueue<>());
-        testQueue(new DynamicListQueue<>());
-    }
+    @Test
+    void testQueueOperations() {
+        Queue<Integer> queue = new LinkedQueue<>();
+        assertTrue(queue.isEmpty());
 
-    public static void testQueue(Queue<Integer> queue) {
-        System.out.println("Testing " + queue.getClass().getSimpleName());
-
-        // Test enqueue and dequeue
         queue.enqueue(1);
         queue.enqueue(2);
         queue.enqueue(3);
 
-        System.out.println("Dequeued: " + queue.dequeue()); // Should print 1
-        System.out.println("Dequeued: " + queue.dequeue()); // Should print 2
+        assertEquals(3, queue.size());
+        assertEquals(1, queue.dequeue());
+        assertEquals(2, queue.size());
+        assertEquals(2, queue.dequeue());
+        assertEquals(1, queue.size());
+        assertEquals(3, queue.dequeue());
 
-        // Test size
-        System.out.println("Queue size: " + queue.size()); // Should print 1
-
-        // Test dequeue the last item
-        System.out.println("Dequeued: " + queue.dequeue()); // Should print 3
-        System.out.println("Queue empty: " + queue.isEmpty()); // Should print true
+        assertTrue(queue.isEmpty());
     }
 }

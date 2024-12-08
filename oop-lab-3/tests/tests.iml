@@ -9,9 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="queue" />
     <orderEntry type="module" module-name="station" />
-    <orderEntry type="module" module-name="dining" />
-    <orderEntry type="module" module-name="refueling" />
-    <orderEntry type="module" module-name="model" />
+    <orderEntry type="module" module-name="Cars" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.10.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-engine:1.10.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.10.1" level="project" />
   </component>
 </module>

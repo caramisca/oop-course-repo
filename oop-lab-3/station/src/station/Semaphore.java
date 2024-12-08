@@ -1,32 +1,52 @@
 package station;
 
 import model.Car;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
+import java.util.Objects;
 
 public class Semaphore {
-    private CarStation electricStation;
-    private CarStation gasStation;
+    private final CarStation carStation; // Single CarStation instance
+    private int countGasCars;
+    private int countElectricCars;
 
-    public Semaphore(CarStation electricStation, CarStation gasStation) {
-        this.electricStation = electricStation;
-        this.gasStation = gasStation;
+    public Semaphore(CarStation carStation) {
+        this.carStation = carStation;
     }
 
-    public void serveCars(List<Car> cars) {
-        for (Car car : cars) {
-            if (car.getType().equals("ELECTRIC")) {
-                if (car.isDining()) {
-                    electricStation.addCar(car);
-                } else {
-                    electricStation.addCar(car);
-                }
-            } else if (car.getType().equals("GAS")) {
-                if (car.isDining()) {
-                    gasStation.addCar(car);
-                } else {
-                    gasStation.addCar(car);
-                }
+    /**
+     * Guides cars to the appropriate processing based on their type and fuel needs.
+     *
+     * @param jsonCars JSON string containing a list of cars.
+     */
+    public void guideCar(String jsonCars) {
+        try {
+            // Parse JSON string into a list of Car objects
+            ObjectMapper objectMapper = new ObjectMapper();
+            Car car = objectMapper.readValue(jsonCars, Car.class);
+            if(Objects.equals(car.getType(), "GAS")){
+                countGasCars++;
+            } else {
+                countElectricCars++;
             }
+            carStation.addCar(car);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public CarStation getCarStation() {
+        return carStation;
+    }
+
+    public int getCountGasCars() {
+        return countGasCars;
+    }
+
+    public int getCountElectricCars() {
+        return countElectricCars;
     }
 }
